@@ -1,16 +1,17 @@
-import { Nav } from './components/Nav';
+import Nav from './components/Nav';
 import CustomerReview from './sections/CustomerReview';
 import Footer from './sections/Footer';
 import { Hero } from './sections/Hero';
 import { PopularProduct } from './sections/PopularProduct';
 import { Services } from './sections/Services';
+import SpecialOffer from './sections/SpecialOffer';
 import { Subscribe } from './sections/Subscribe';
 import SuperQuality from './sections/SuperQuality';
 
 const App = () => (
   <main className='relative'>
-    {/* <Nav /> */}
-    <section className='xl:padding-1 wide:padding-r padding-b'>
+    <Nav />
+    <section className='xl:padding-l wide:padding-r padding-b'>
       <Hero />
     </section>
     <section></section>
@@ -22,6 +23,9 @@ const App = () => (
     </section>
     <section className='padding-x py-10'>
       <Services />
+    </section>
+    <section className='padding'>
+      <SpecialOffer />
     </section>
     <section className='padding bg-pale-blue'>
       <CustomerReview />
