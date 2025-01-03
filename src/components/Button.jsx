@@ -1,10 +1,11 @@
 import React from 'react';
 
-const Button = ({ label, iconURL }) => {
+const Button = ({ label, iconURL, className, fullWidth }) => {
   return (
     <button
-      className='flex justify-center items-center gap-2 px-7 py-4 border 
-    font-montserrat text-lg leading-none bg-coral-red text-white rounded-full'>
+      className={`flex justify-center items-center gap-2 px-7 py-4 border 
+    font-montserrat text-lg leading-none bg-coral-red text-white rounded-full ${className}
+      ${fullWidth && 'w-full'}`}>
       {label}
       {iconURL && (
         <img
