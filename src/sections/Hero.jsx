@@ -54,6 +54,7 @@ export const Hero = () => {
         -bottom-[5%] sm:left-[10%] max-sm:px-6'>
           {shoes.map((shoe) => (
             <ShoeCard
+              key={shoe}
               imgURL={shoe}
               changeBigShoeImage={changeBigShoeImage}
               bigShoeImage={shoeURL}
