@@ -1,32 +1,45 @@
-name: Deploy to Azure Web App
+name: JavaScript CI
 
-on:
-  push:
-    branches:
-      - main # Change this to your deployment branch
+on: [push]
+
+name: Node.js
+
+env:
+  AZURE_WEBAPP_NAME: shoe-ecom   # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: './'      # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '18.x'                # set this to the node version to use
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    # checkout the repo
+    - name: 'Checkout GitHub Action' 
+      uses: actions/checkout@main
+   
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: Setup Node ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    
+    - name: 'npm install, build, and test'
+      run: |
+        npm install
+        npm run build --if-present
+        npm run test --if-present
+      working-directory:  my-app-path
+               
+    # deploy web app using Azure credentials
+    - uses: azure/webapps-deploy@v3
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x' # Use the version matching your app requirements
-
-      - name: Install dependencies
-        run: |
-          npm install
-          npm run build
-
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'shoe-ecom'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
-          package: ${{ github.workspace }}/build
+    # Azure logout 
+    - name: logout
+      run: |
+        az logout
