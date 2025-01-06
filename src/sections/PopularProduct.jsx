@@ -16,7 +16,7 @@ export const PopularProduct = () => {
           className='mt-16 grid grid-cols-1 md:grid-cols-3
          sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 gap-14'>
           {products.map((product) => (
-            <PopularProductCard key={product.id} {...product} />
+            <PopularProductCard key={product.name} {...product} />
           ))}
         </div>
       </div>

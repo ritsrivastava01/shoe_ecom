@@ -1,4 +1,5 @@
 import { star } from '../assets/icons';
+import PropTypes from 'prop-types';
 
 const PopularProductCard = ({ imgURL, name, price }) => {
   return (
@@ -16,6 +17,11 @@ const PopularProductCard = ({ imgURL, name, price }) => {
       </p>
     </div>
   );
+};
+PopularProductCard.propTypes = {
+  imgURL: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired
 };
 
 export default PopularProductCard;

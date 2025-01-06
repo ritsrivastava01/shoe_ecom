@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ServiceCard = ({ imgURL, label, subtext }) => {
   return (
@@ -18,6 +19,11 @@ const ServiceCard = ({ imgURL, label, subtext }) => {
       </p>
     </div>
   );
+};
+ServiceCard.propTypes = {
+  imgURL: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  subtext: PropTypes.string.isRequired
 };
 
 export default ServiceCard;
