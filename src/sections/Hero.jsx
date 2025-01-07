@@ -8,6 +8,7 @@ import { shoes, statistics } from '../constants';
 export const Hero = () => {
   const [shoeURL, setShoeURL] = useState(bigShoe1);
   const changeBigShoeImage = (imgURL) => {
+    console.log(imgURL);
     setShoeURL(imgURL);
   };
   return (
